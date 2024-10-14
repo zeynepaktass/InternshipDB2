@@ -1,0 +1,125 @@
+.advisorTitle{
+	border: 1px solid black;
+	padding: 10px;
+	border-bottom:transparent;
+	width:100%;
+}
+
+.mainDiv{
+	border: 1px solid black;
+	margin-top: -11px;
+	padding:10px;
+}
+
+table td, table th{
+	padding:5px;
+	text-align:center;
+}
+
+.approved{
+	background-color:#C9FFB0;
+}
+
+.rejected{
+	background-color:#FFA1A1;
+}
+
+.search {
+	float:right;
+	margin-bottom: 10px;
+}
+
+#searchIcon {
+	margin:5px;
+}
+
+#card2 {
+	margin-left:180x;
+}
+
+#myTable td a {
+	color:blue;
+	text-decoration:underline;
+}
+
+.warning-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+    text-align: center;
+    display: none;
+    width: 500px;
+}
+
+.warning-button {
+    padding: 8px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+}
+
+.yes-button {
+    background-color: #3498db;
+}
+
+.no-button {
+    background-color: #e74c3c;
+}
+
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 16px;
+  border: 1px solid black;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #8F8F8F;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: black;
+}
+
+.main {
+  margin-left: 200px; 
+  padding: 0px 10px;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  position: absolute; 
+  bottom: 20px;
+}
+
+#totalWorkDays {
+    width: 100px;
+    display: inline-block;
+}
+
+#studentNo {
+    width: 100px;
+    display: inline-block;
+}

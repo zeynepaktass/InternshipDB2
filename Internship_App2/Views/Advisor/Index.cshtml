@@ -1,0 +1,93 @@
+﻿@model List<StudentModel>
+@{
+	Layout = "~/Views/Shared/_AdvisorLayout.cshtml";
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="col-md-12">
+	<div class="card" id="card2">
+		<div class="card-header">
+			<div>
+				<h2 class="text-center">Advisor Confirmation Screen</h2>
+				<input type="text" class="search" id="myInput" onkeyup="myFunction()" placeholder="Search" /><i class="bi bi-search search" id="searchIcon"></i>
+
+			</div>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table" id="myTable" scroll>
+					<tr>
+						<th onclick="sortTable(0)"> Student No. </th>
+						<th onclick="sortTable(1)"> Student Name </th>
+						<th onclick="sortTable(2)"> Faculty/Collage Name </th>
+						<th onclick="sortTable(3)"> Internship Start Date - Finish Date </th>
+						<th onclick="sortTable(4)"> Status </th>
+						<th onclick="sortTable(5)"> Institution Approval Document </th>
+						<th onclick="sortTable(6)"> Operations </th>
+					</tr>
+
+					@foreach (var item in Model)
+					{
+						@if(item.InternshipApplication.ApplicationStatus==0)
+						{
+							<tr class="rejected">
+								<td> @item.Student.StudentNo </td>
+								<td> @item.Student.FirstName @item.Student.LastName </td>
+								<td> @item.Student.Department </td>
+								<td> @item.InternshipApplication.InternshipStartDate.ToString("dd-MM-yyyy") - @item.InternshipApplication.InternshipEndDate.ToString("dd-MM-yyyy") </td>
+								<td>Waiting Approval</td>
+								<td> <a href="~/documents/@item.InternshipApplication.RequiredDocuments" download> Document </a> </td>
+								<td> <a href="/advisor/InternshipDetail/@item.InternshipApplication.ApplicationId"> Inspect/Edit </a>
+								@*Call the EmailService to send approvel email*@
+								</td>
+							</tr>
+						}
+						else if(item.InternshipApplication.ApplicationStatus==1)
+						{
+							<tr class="approved">
+								<td> @item.Student.StudentNo </td>
+								<td> @item.Student.FirstName @item.Student.LastName </td>
+								<td> @item.Student.Department </td>
+								<td> @item.InternshipApplication.InternshipStartDate.ToString("dd-MM-yyyy") - @item.InternshipApplication.InternshipEndDate.ToString("dd-MM-yyyy") </td>
+								<td> Approved</td>
+								<td> <a href ="~/documents/@item.InternshipApplication.RequiredDocuments" download> Document </a> </td>
+								<td> <a href="/advisor/InternshipDetail/@item.InternshipApplication.ApplicationId"> Inspect/Edit </a>
+								</td>
+							</tr>
+						}
+						else
+						{
+							<tr class="rejected">
+								<td> @item.Student.StudentNo </td>
+								<td> @item.Student.FirstName @item.Student.LastName </td>
+								<td> @item.Student.Department </td>
+								<td> @item.InternshipApplication.InternshipStartDate.ToString("dd-MM-yyyy") - @item.InternshipApplication.InternshipEndDate.ToString("dd-MM-yyyy") </td>
+								<td>Rejected</td>
+								<td> <a href="~/documents/@item.InternshipApplication.RequiredDocuments" download> Document </a> </td>
+								<td>
+									<a href="/advisor/InternshipDetail/@item.InternshipApplication.ApplicationId"> Inspect/Edit </a>
+									@*Call the EmailService to send approvel email*@
+								</td>
+							</tr>
+						}
+					}
+					
+				</table>
+			</div>
+		</div>
+
+		<div id="warningWindow" class="warning-window">
+			<p>Are you sure that you want to do this process?</p>
+			<button id="yesButton" class="warning-button yes-button">Yes</button>
+			<button id="noButton" class="warning-button no-button">No</button>
+		</div>
+		</div></div>
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function () {
+		var loginType = localStorage.getItem('loginType');
+		if (!loginType || loginType !== 'advisor login') {
+			window.location.href = '@Url.Action("Login", "Account")';
+		}
+	});
+</script>

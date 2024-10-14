@@ -1,0 +1,183 @@
+﻿@using Internship_App2.AppDbContext;
+@model List<AdminCalendar>
+@{
+    Layout = null;
+}
+
+
+@{
+    ViewBag.Title = "Calendar";
+}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        background-size: cover;
+        background-position: center;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-top: 0rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .denem1 {
+        max-width: 600px;
+        margin: 4rem auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 2px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    input[type="text"] {
+        width: calc(100% - 10px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    #listforitems {
+        list-style-type: none;
+        padding: 0;
+    }
+
+        #listforitems li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+            #listforitems li:last-child {
+                margin-bottom: 0;
+            }
+
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        margin-left: -35%;
+    }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+
+    .kulturlogo {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: flex-start;
+        margin-left: -35%;
+    }
+
+    .toolbar {
+        position: fixed;
+        left: 1%;
+        top: 0;
+        height: 100%;
+        width: 10%;
+        padding-top: 15rem
+    }
+
+        .toolbar button {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            margin-bottom: 10px;
+            background-color: #555;
+            border: none;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .form-group {
+        margin-left: 7rem;
+    }
+
+    #buttonfornewitem {
+        background-color: blue;
+        color: white;
+    }
+
+    .toolbar button:hover {
+        background-color: #777;
+    }
+</style>
+
+
+
+<h2>CalendarList</h2>
+
+<p>
+    @Html.ActionLink("Yeni Tarih Ekle", "Calendar")
+</p>
+<div class="row container">
+
+    <div class="col-10">
+        <table class="table">
+            <tr>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    End Date
+                </th>
+                <th>
+                    Description
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

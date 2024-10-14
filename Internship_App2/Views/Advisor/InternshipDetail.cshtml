@@ -1,0 +1,215 @@
+﻿@model StudentModel
+@{
+    ViewData["Title"] = "InternshipDetail";
+    Layout = "~/Views/Shared/_AdvisorLayout.cshtml";
+}
+
+
+
+
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="text-center"> Internship Information </h3>
+				</div>
+				<div class="card-body">
+			<form asp-action="UpdateInformation" asp-controller="Advisor" method="post">
+				<input type="hidden" asp-for="InternshipApplication.ApplicationId" />
+						<img width="200" class="studentImg" src="~/images/@Model.Student.ProfilePhoto" alt="Student Image">
+						<br />
+						<br />
+
+						<div class="row">
+							<div class="col-md-3">
+								<label for="studentNo">Student Number:</label>
+								<input style="width:120px" asp-for="@Model.Student.StudentNo" type="text" id="studentNo" class="form-control" disabled />
+
+							</div>
+							<div class="col-md-3">
+							</div>
+							<div class="col-md-3">
+							</div>
+							<div class="col-md-3">
+							</div>
+						</div>
+						<br />
+
+
+						<div class="row">
+							<div class="col-md-3">
+								<b> Type of Internship </b>
+							</div>
+							<div class="col-md-3">
+								<b> Personal Information </b>
+							</div>
+							<div class="col-md-3">
+								<b> Company Information </b>
+							</div>
+							<div class="col-md-3">
+								<b> Company Representative Information </b>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<input type="radio" id="mandatory" asp-for="@Model.InternshipApplication.InternshipType" value="Mandatory" />
+								<label for="mandatory"> Mandatory Internship </label><br />
+								<input type="radio" id="volunteer" asp-for="@Model.InternshipApplication.InternshipType" value="Volunteer" />
+								<label for="volunteer"> Volunteer Internship </label><br />
+							</div>
+
+							<div class="col-md-3">
+					Name:<input type="text" asp-for="@Model.Student.FirstName" class="form-control" placeholder="Type your name" disabled />
+							</div>
+
+							<div class="col-md-3">
+								Name:<input type="text" asp-for="@Model.InternshipApplication.CompanyName" class="form-control" placeholder="Type company name" />
+							</div>
+
+							<div class="col-md-3">
+								Name:<input type="text" asp-for="@Model.InternshipApplication.EmployerName" class="form-control" placeholder="Type company representative name" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<br />
+								<label for="startDate">Internship Start Date:</label>
+								<input type="date" asp-for="@Model.InternshipApplication.InternshipStartDate" id="startDate" />
+							</div>
+							<div class="col-md-3">
+					Surname:<input type="text" asp-for="@Model.Student.LastName" class="form-control" placeholder="Type your surname" disabled />
+							</div>
+
+							<div class="col-md-3">
+								Field:<input type="text" asp-for="@Model.InternshipApplication.FieldOfActivity" class="form-control" placeholder="Type company field" />
+							</div>
+
+							<div class="col-md-3">
+								Surname:<input type="text" asp-for="InternshipApplication.EmployerSurname" class="form-control" placeholder="Type company representative surname" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<label for="FinishDate">Internship Finish Date:</label>
+								<input asp-for="@Model.InternshipApplication.InternshipEndDate" type="date" id="finishDate" />
+							</div>
+
+							<div class="col-md-3">
+					E-mail:<input type="email" asp-for="@Model.Student.Email" class="form-control" placeholder="Type your e-mail address" disabled />
+							</div>
+
+							<div class="col-md-3">
+								E-mail:<input type="email" asp-for="@Model.InternshipApplication.CompanyEmail" class="form-control" placeholder="Type company e-mail address" />
+							</div>
+
+							<div class="col-md-3">
+								E-mail:<input type="email" asp-for="@Model.InternshipApplication.EmployerEmail" class="form-control" placeholder="Type company representative e-mail address" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<label for="totalWorkDays">Total Work Days:</label>
+								<input asp-for="@Model.InternshipApplication.Duration" type="text" id="totalWorkDays" class="form-control" disabled />
+							</div>
+
+							<div class="col-md-3">
+					Phone:<input type="tel" asp-for="@Model.Student.PhoneNumber" class="form-control" placeholder="Type your phone number" disabled />
+							</div>
+
+							<div class="col-md-3">
+								Phone:<input type="tel" asp-for="@Model.InternshipApplication.CompanyPhoneNumber" class="form-control" placeholder="Type company phone number" />
+							</div>
+
+							<div class="col-md-3">
+								Phone:<input type="tel" asp-for="InternshipApplication.EmployerPhone" class="form-control" placeholder="Type company representative phone number" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+							</div>
+
+							<div class="col-md-3">
+					Address:<input type="text" asp-for="@Model.Student.Address" class="form-control" placeholder="Type your address" disabled />
+							</div>
+
+							<div class="col-md-3">
+								Address:<input type="text" asp-for="@Model.InternshipApplication.CompanyAddress" class="form-control" placeholder="Type company address" />
+							</div>
+
+							<div class="col-md-3">
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+							</div>
+
+							<div class="col-md-3">
+					Department:<input type="text" asp-for="@Model.Student.Department" class="form-control" placeholder="Type department" disabled />
+							</div>
+
+					<div class="col-md-3">
+						Advisor Email:<input type="text" asp-for="@Model.InternshipApplication.AdvisorEmail" class="form-control" placeholder="Type advisor email" />
+					</div>
+
+							<div class="col-md-3">
+							</div>
+						</div>
+
+
+						<br />
+						<br />
+
+						<div class="row">
+							<div class="col-md-3">
+								<input type="submit" class="form-control btn btn-warning" value="Update information" />
+							</div>
+						@if (Model.InternshipApplication.ApplicationStatus == 0)
+						{
+							<div class="col-md-3">
+								<!--  <input type="submit" onclick="confirmDelete()" class="form-control btn btn-danger" value="Reject" /> -->
+							<a href="/advisor/ChangeStatusRejected/@Model.InternshipApplication.ApplicationId" class="form-control btn btn-danger"> Reject </a>
+							</div>
+
+						<div class="col-md-3">
+							<!-- <input type="submit" onclick="confirmDelete()" class="form-control btn btn-success" value="Approve" /> -->
+							<a href="/advisor/ChangeStatusApproved/@Model.InternshipApplication.ApplicationId" class="form-control btn btn-success">  Approve </a>
+
+						</div>
+						}
+					else if (Model.InternshipApplication.ApplicationStatus == 1)
+						{
+						<div class="col-md-3">
+							<!--  <input type="submit" onclick="confirmDelete()" class="form-control btn btn-danger" value="Reject" /> -->
+							<a href="/advisor/ChangeStatusRejected/@Model.InternshipApplication.ApplicationId" class="form-control btn btn-danger"> Reject </a>
+						</div>
+					}
+					else
+					{
+						<div class="col-md-3">
+							<!-- <input type="submit" onclick="confirmDelete()" class="form-control btn btn-success" value="Approve" /> -->
+							<a href="/advisor/ChangeStatusApproved/@Model.InternshipApplication.ApplicationId" class="form-control btn btn-success">  Approve </a>
+
+						</div>
+					}
+
+
+
+						</div>
+			</form>
+				</div>
+			</div>
+			</div>
+
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function () {
+		var loginType = localStorage.getItem('loginType');
+		if (!loginType || loginType !== 'advisor login') {
+			window.location.href = '@Url.Action("Login", "Account")';
+		}
+	});
+</script>

@@ -1,0 +1,350 @@
+﻿@using Internship_App2.AppDbContext;
+
+
+@{
+    ViewData["Title"] = "AddInternship";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+}
+
+@model StudentModel
+
+<script src="jquery-3.7.1.min.js" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
+
+<div class="mainDiv">
+	<br />
+	<br />
+
+	<div class="row">
+		<div class="col-md-2">
+			<div class="sidebar">
+				<a href="studentPage.html"><i class="fa fa-fw fa-home"></i> Internship Application Form </a>
+				<a href="#"><i class="bi bi-megaphone-fill"></i> Internship Announcements </a>
+				<a asp-controller="Account" asp-action="Login" class="logout-btn"><i class="bi bi-box-arrow-right"></i> Log Out </a>
+			</div>
+		</div>
+
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="text-center"> Internship Information </h3>
+				</div>
+				<div class="card-body">
+					<form class="form" id="myForm" asp-controller="Student" asp-action="AddInternship" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="Number" value="@ViewBag.StudentNo" />
+						<input type="hidden" name="days" id="Duration" />
+						<input type="hidden" asp-for="AdSoyad" value="sdsdsd"  />
+						<input type="hidden" asp-for="İcerik" value="sdsdsd"  />
+						<input type="hidden" asp-for="EmailService" value="sdsdsd@sd"  />
+						<input type="hidden" asp-for="Baslik" value="sdsdsd"  />
+				
+
+				@*	<div asp-validation-summary="All" class="text-danger"></div> *@
+					@*	<img class="studentImg" src="myImage.png" alt="Student Image">*@
+						<label for="file">Upload your photo:</label>
+						<input type="file" name="file" />
+						<span class="text-danger" >@ViewBag.fileAlert</span>
+
+						<br />
+						<br />
+
+						<div class="row">
+							<div class="col-md-3">
+								<label for="studentNo">Student Number:</label>
+								<input style="width:120px" asp-for="@Model.Student.StudentNo" value="@ViewBag.StudentNo" type="text" id="studentNo" class="form-control" disabled />
+
+								<span class="text-danger" asp-validation-for="Student.StudentNo"></span>
+							</div>
+							<div class="col-md-3">
+								
+							</div>
+							<div class="col-md-3">
+								
+							</div>
+							<div class="col-md-3">
+								
+							</div>
+						</div>
+						<br/>
+					
+
+						<div class="row">
+							<div class="col-md-3">
+								<b> Type of Internship </b>
+							</div>
+							<div class="col-md-3">
+								<b> Personal Information </b>
+							</div>
+							<div class="col-md-3">
+								<b> Company Information </b>
+							</div>
+							<div class="col-md-3">
+								<b> Company Representative Information </b>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<input type="radio" id="mandatory" asp-for="@Model.InternshipApplication.InternshipType"  value="Mandatory" />
+								<label for="mandatory"> Mandatory Internship </label><br />
+								<input type="radio" id="volunteer" asp-for="@Model.InternshipApplication.InternshipType" value="Volunteer" />
+								<label for="volunteer"> Volunteer Internship </label><br />
+								<span class="text-danger" asp-validation-for="InternshipApplication.InternshipType"></span>
+							</div>
+
+							<div class="col-md-3">
+								Name:<input type="text" asp-for="@Model.Student.FirstName" class="form-control" placeholder="Type your name" />
+								<span class="text-danger" asp-validation-for="Student.FirstName"></span>
+							</div>
+
+							<div class="col-md-3">
+								Name:<input type="text" asp-for="@Model.InternshipApplication.CompanyName"  class="form-control" placeholder="Type company name" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.CompanyName"></span>
+							</div>
+
+							<div class="col-md-3">
+								Name:<input type="text" asp-for="@Model.InternshipApplication.EmployerName" class="form-control" placeholder="Type company representative name" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.EmployerName"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<br />
+								<label for="startDate">Internship Start Date:</label>
+								<input type="date" asp-for="@Model.InternshipApplication.InternshipStartDate" id="startDate" onchange="handle()" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.InternshipStartDate"></span>
+							</div>
+							<div class="col-md-3">
+								Surname:<input type="text"  asp-for="@Model.Student.LastName" class="form-control" placeholder="Type your surname" />
+								<span class="text-danger" asp-validation-for="Student.LastName"></span>
+							</div>
+
+							<div class="col-md-3">
+								Field:<input type="text" asp-for="@Model.InternshipApplication.FieldOfActivity"  class="form-control" placeholder="Type company field" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.FieldOfActivity"></span>
+							</div>
+
+							<div class="col-md-3">
+								Surname:<input type="text" asp-for="@Model.InternshipApplication.EmployerSurname"  class="form-control" placeholder="Type company representative surname" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.EmployerSurname"></span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<label for="FinishDate">Internship Finish Date:</label>
+								<input asp-for="@Model.InternshipApplication.InternshipEndDate" type="date" id="finishDate" onchange="handle()"  />
+								<span class="text-danger" asp-validation-for="InternshipApplication.InternshipEndDate"></span>
+							</div>
+
+							<div class="col-md-3">
+								E-mail:<input type="email" asp-for="@Model.Student.Email"  class="form-control" placeholder="Type your e-mail address" />
+								<span class="text-danger" asp-validation-for="Student.Email"></span>
+							</div>
+
+							<div class="col-md-3">
+								E-mail:<input type="email" asp-for="@Model.InternshipApplication.CompanyEmail" class="form-control" placeholder="Type company e-mail address" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.CompanyEmail"></span>
+							</div>
+
+							<div class="col-md-3">
+								E-mail:<input type="email" asp-for="@Model.InternshipApplication.EmployerEmail" class="form-control" placeholder="Type company representative e-mail address" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.EmployerEmail"></span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<label for="totalWorkDays">Total Work Days:</label>
+								<input type="number"  id="totalWorkDays" class="form-control" disabled />
+							</div>
+
+							<div class="col-md-3">
+								Phone:<input type="tel"  asp-for="@Model.Student.PhoneNumber" class="form-control" placeholder="Type your phone number" />
+								<span class="text-danger" asp-validation-for="Student.PhoneNumber"></span>
+							</div>
+
+							<div class="col-md-3">
+								Phone:<input type="tel" asp-for="@Model.InternshipApplication.CompanyPhoneNumber" class="form-control" placeholder="Type company phone number" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.CompanyPhoneNumber"></span>
+							</div>
+
+							<div class="col-md-3">
+								Phone:<input type="tel" asp-for="@Model.InternshipApplication.EmployerPhone" class="form-control" placeholder="Type company representative phone number" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.EmployerPhone"></span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+							</div>
+
+							<div class="col-md-3">
+								Address:<input type="text" asp-for="@Model.Student.Address" class="form-control" placeholder="Type your address" />
+								<span class="text-danger" asp-validation-for="Student.Address"></span>
+							</div>
+
+							<div class="col-md-3">
+								Address:<input type="text" asp-for="@Model.InternshipApplication.CompanyAddress" class="form-control" placeholder="Type company address" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.CompanyAddress"></span>
+							</div>
+
+							<div class="col-md-3">
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col-md-3">
+								<label for="myfile">Select a file:</label>
+								<input type="file" name="myfile" id="myfile" />
+								<span class="text-danger">@ViewBag.myfileAlert</span>
+
+							</div>
+
+							<div class="col-md-3">
+								Department:<input type="text" asp-for="@Model.Student.Department" class="form-control" placeholder="Type department" />
+								<span class="text-danger" asp-validation-for="Student.Department"></span>
+							</div>
+
+							<div class="col-md-3">
+								Advisor Email:<input type="text" asp-for="@Model.InternshipApplication.AdvisorEmail" class="form-control" placeholder="Type advisor email" />
+								<span class="text-danger" asp-validation-for="InternshipApplication.AdvisorEmail"></span>
+							</div>
+
+							<div class="col-md-3">
+							</div>
+						</div>
+
+
+						<br />
+						<br />
+
+						<div class="row">
+							<div class="col-md-3">
+							</div>
+
+							<div class="col-md-3">
+								<input  type="submit" class="form-control btn btn-success" id="Submit" value="Submit" />
+								<!-- <a class="form-control btn btn-success" onclick="confirmDelete()"> Submit </a> -->
+							</div>
+
+							<div class="col-md-3">
+								<!-- <input type="Reset" class="form-control btn btn-danger" value="Reset" />  -->
+								<a class="form-control btn btn-danger" onclick="confirmResett()"> Reset </a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+
+<script>
+
+	function confirmResett(){
+		var studentNo = document.getElementById("studentNo").value;
+		console.log(studentNo)
+		showWarning();
+
+		yesButton.onclick = function () {
+			var inputs = document.querySelectorAll('#myForm input');
+			inputs.forEach(function (input) {
+				input.value = '';
+				var submit = document.getElementById('Submit');
+				submit.value = 'Submit';
+				document.getElementById("mandatory").checked = false;
+				document.getElementById("volunteer").checked = false;
+				document.getElementById("studentNo").value = studentNo;
+			});
+			hideWarning();
+		}
+		noButton.onclick = function () {
+			hideWarning();
+		}
+	}
+
+	var mandatory = document.getElementById("mandatory");
+	  
+		mandatory.addEventListener("click",function(){
+		if (document.getElementById("startDate").value != "" && document.getElementById("finishDate").value!="")
+		{
+			if (document.getElementById("totalWorkDays").value == "20" || document.getElementById("totalWorkDays").value == "40") {
+				
+			}
+			else{
+				alert("Mandatory internship has to be 20 or 40 working days.");
+				document.getElementById("startDate").value = "";
+				document.getElementById("finishDate").value = "";
+				document.getElementById("totalWorkDays").value = "";
+				document.getElementById("Duration").value = "";
+			}
+		}
+		})
+		
+
+function handle() {
+		var startDate = document.getElementById("startDate").value;
+		var finishDate = document.getElementById("finishDate").value;
+
+		if (startDate != "" && finishDate != "") {
+			console.log(startDate)
+			console.log(finishDate)
+
+			$.ajax({
+				method: "GET",
+				url: "/student/CalculateTotalWorkDays",
+				data: {
+					startDate:startDate, 
+					finishDate: finishDate, 
+				},
+				success: function (response) {
+					console.log(response)
+					if(response==0)
+					{
+						alert("Finish date cannot be earlier than start date.");
+						document.getElementById("startDate").value="";
+						document.getElementById("finishDate").value="";
+					}
+					else
+					{
+						document.getElementById("totalWorkDays").value = response;
+						document.getElementById("Duration").value = response;
+
+						if (mandatory.checked) {
+							if (response != 20 && response != 40) {
+								setTimeout(function () {
+									alert("Mandatory internship has to be 20 or 40 working days.");
+									document.getElementById("startDate").value = "";
+									document.getElementById("finishDate").value = "";
+									document.getElementById("totalWorkDays").value = "";
+									document.getElementById("Duration").value = "";
+								}, 1000); 
+							}
+						}
+
+					}
+				
+				},
+				error: function (xhr, status, error) {
+					console.error("Request failed: " + error);
+				}
+			});
+		}
+	}
+								
+</script>
+
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function () {
+		var loginType = localStorage.getItem('loginType');
+		console.log("type:"+loginType)
+		if (!loginType || loginType !== 'student login') {
+			window.location.href = '@Url.Action("Login", "Account")';
+		}
+	});
+</script>
